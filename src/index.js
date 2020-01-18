@@ -8,13 +8,13 @@ import 'tachyons';
 
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import { requestRobots, searchRobots } from './reducers'
+import {searchRobots, manage_data} from './reducers'
 
 import './index.css';
 
 const logger = createLogger()
 
-const rootReducers = combineReducers({requestRobots, searchRobots})
+const rootReducers = combineReducers({searchRobots,manage_data})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 

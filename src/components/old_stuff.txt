@@ -1,0 +1,22 @@
+  state = {name: "",
+           username: "",
+           email: ""
+        };
+
+   change = e =>{
+   	this.setState({[e.target.name]: e.target.value});
+   	e.target.value = '';
+   }
+
+   clearFields = (obj) =>{
+   	this.setState({name:'',
+   		           username:'',
+   		           email:''
+     });
+   }   
+
+  add = (e) =>{
+  e.preventDefault();
+  this.props.addToList(this.state);
+  this.clearFields();
+  };
