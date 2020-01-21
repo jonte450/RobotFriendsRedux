@@ -11,16 +11,18 @@ import {
   REQUEST_ROBOTS_FAILED
  } from './constants';
 
-const initialStateSearch = {
-  searchField: ''
-}
 const data = {
-  robots: [],
-  isPending: true,
+  robots: [{id:1,
+            name:'John Doe',
+            username:'JD',
+            email:'john_doe@gmail.com',
+  }],
   id: '',
   name: '',
   username: '', 
-  email: ''
+  email: '',
+  isPending: true,
+  searchField: ''
 }
 
 function clear_field(user){
@@ -30,10 +32,10 @@ function clear_field(user){
 }
 
 function addNewRobot(obj,list){
-var new_robot = new Object();
+var new_robot = {};
 new_robot.id = obj.robots.length + 1;
 new_robot.name = obj.name;
-new_robot.username = obj.userName;
+new_robot.username = obj.username;
 new_robot.email = obj.email;
 list.push(new_robot);
 return list;
@@ -63,16 +65,9 @@ export const manage_data = (state=data,action={})=>{
       return Object.assign({}, state, {robots: action.payload, isPending: false})
     case REQUEST_ROBOTS_FAILED:
       return Object.assign({}, state, {error: action.payload})
+    case CHANGE_SEARCHFIELD:
+      return Object.assign({}, state, {searchField: action.payload})  
       default:
       return state;
-  }
-}
-
-export const searchRobots = (state=initialStateSearch, action={}) => {
-  switch (action.type) {
-    case CHANGE_SEARCHFIELD:
-      return Object.assign({}, state, {searchField: action.payload})
-    default:
-      return state
   }
 }
