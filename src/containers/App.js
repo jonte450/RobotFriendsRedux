@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link,Route,Switch} from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CardList from '../components/CardList';
-import {setName,addRobot} from '../actions';
+import {setName, addRobot, setUserName, setEmail} from '../actions';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import ErrorBoundry from '../components/ErrorBoundry';
@@ -14,7 +14,7 @@ import DeleteRobot from '../components/DeleteRobot';
 import './App.css';
 
 
-function App({robots,name,nameChange,addToList})  {
+function App({robots,name,nameChange,username,userNameChange,email,emailChange,addToList})  {
 
     const stylecur = {fill:'currentcolor'};                
     return (
@@ -44,7 +44,7 @@ function App({robots,name,nameChange,addToList})  {
 
       <Route 
       path='/addRobo'
-      render={props => <AddRobot {...props} name={name} nameChange={nameChange} addToList={addToList}/>}
+      render={props => <AddRobot {...props} name={name} nameChange={nameChange} username={username} userNameChange={userNameChange} email={email} emailChange={emailChange} addToList={addToList}/>}
       />
 
       </Switch>  
@@ -62,26 +62,20 @@ function App({robots,name,nameChange,addToList})  {
 const mapStateToProps = (state) =>{
   return {
     robots: state.manage_data.robots,
-    name: state.manage_data.name
+    name: state.manage_data.name,
+    username: state.manage_data.username,
+    email: state.manage_data.email,
   }
 }
 
 const mapDispachToProps = (dispatch) =>{
   return {
     nameChange:(event) => dispatch(setName(event.target.value)),
-    addToList: () => dispatch(addRobot())
+    userNameChange: (event) => dispatch(setUserName(event.target.value)),
+    emailChange: (event) => dispatch(setEmail(event.target.value)),
+    addToList: () => dispatch(addRobot()),
   }
 }
 
 
 export default connect(mapStateToProps,mapDispachToProps)(App);
-
-
-      
-   //{routes.map(({id, path, component: Component }) => (
-   //<Route
-   // key={id}
-   // path={path}
-   // component={Component} // sans the angle brackets </>
-  ///>))
-///}   

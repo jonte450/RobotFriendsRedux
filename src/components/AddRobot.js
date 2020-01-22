@@ -1,16 +1,6 @@
 import	React from 'react';
 
-const AddRobot = ({name,nameChange,addToList}) => {
-    const emailInput = React.useRef();
-    const nameInput = React.useRef();
-    const userInput = React.useRef();
-   
-
-    const clearInputs = () => {emailInput.current.value="";
-                              nameInput.current.value="";
-                              userInput.current.value="";};
-    
-
+const AddRobot = ({name,nameChange,username,userNameChange,email,emailChange,addToList}) => {
 
   	return (
     <div>
@@ -22,26 +12,21 @@ const AddRobot = ({name,nameChange,addToList}) => {
         placeholder='Add Name'
         value={name}
         onChange={nameChange}
-        ref={nameInput}
       />
 
-   <input
+     <input
         className='pa2 ba b--green bg-lightest-blue'
         placeholder='Add Username'
-        ///value={username}
-        ///onChange={username}
-        ref={userInput}
+        value={username}
+        onChange={userNameChange}
       />
 
-    <input
-       className='pa2 ba b--green bg-lightest-blue'
-       name="email"
-       placeholder='Add Email'
-       ///value={email}
-       ///onChange={handleEmail}
-       ref={emailInput}
-
-    />
+     <input
+        className='pa2 ba b--green bg-lightest-blue'
+        placeholder='Add Email'
+        value ={email}
+        onChange={emailChange}
+      />
 
       <button className="f50 link dim ph3 pv2 mb2 dib white bg-dark-green ma2" 
          href="addRobo"
@@ -50,17 +35,8 @@ const AddRobot = ({name,nameChange,addToList}) => {
          Add Robot
         </button>
 
-      <button className="f50 link dim ph3 pv2 mb2 dib white bg-dark-green ma1" 
-         href="#0"
-         onClick={clearInputs}
-         >
-         Reset Inputs
-      </button>
-
-
     </div>
  );
 }
-
 
 export default AddRobot;

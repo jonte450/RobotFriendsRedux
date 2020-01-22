@@ -56,7 +56,7 @@ export const manage_data = (state=data,action={})=>{
     case CHANGE_NAME: 
       return Object.assign({}, state,{name: action.payload})
     case CHANGE_USERNAME: 
-      return Object.assign({}, state,{userName: action.payload})
+      return Object.assign({}, state,{username: action.payload})
     case CHANGE_EMAIL: 
       return Object.assign({}, state,{email: action.payload})
     case REQUEST_ROBOTS_PENDING:
