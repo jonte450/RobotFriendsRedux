@@ -1,19 +1,19 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = ({robots}) => {
-  if(robots !== undefined){
+const CardList = ({filteredRobots}) => {
+  if(filteredRobots !== undefined){
   return (
     <div>
       {
-        robots.map((user, i) => {
+        filteredRobots.map((user, i) => {
           return (
             
             <Card
               key={i}
-              id={robots[i].id}
-              name={robots[i].name}
-              email={robots[i].email}
+              id={filteredRobots[i].id}
+              name={filteredRobots[i].name}
+              email={filteredRobots[i].email}
               />
           );
         })

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link,Route,Switch} from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CardList from '../components/CardList';
-import {setName, addRobot, setUserName, setEmail} from '../actions';
+import {setName, addRobot, setUserName, setEmail,setId,updateRobot,upName,upUserName,upEmail,delid,deleteRobot,setSearchField} from '../actions';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import ErrorBoundry from '../components/ErrorBoundry';
@@ -14,9 +14,16 @@ import DeleteRobot from '../components/DeleteRobot';
 import './App.css';
 
 
-function App({robots,name,nameChange,username,userNameChange,email,emailChange,addToList})  {
 
-    const stylecur = {fill:'currentcolor'};                
+function App({robots,name,nameChange,username,userNameChange,email,emailChange,addToList,id,idChange,upName,upNameChange,upUserName,upUserNameChange,uppdate_robo,upEmail,upEmailChange,delid,Changedelid,delRobo,search,onSearchChange})  {
+
+    const stylecur = {fill:'currentcolor'};
+    var filteredRobots = robots;
+     if(search !==''){
+      filteredRobots = robots.filter(robot=> {
+      return robot.name.toLowerCase().includes(search.toLowerCase());
+      })
+      }                  
     return (
       <Router>
       <div className='tc'>
@@ -47,10 +54,24 @@ function App({robots,name,nameChange,username,userNameChange,email,emailChange,a
       render={props => <AddRobot {...props} name={name} nameChange={nameChange} username={username} userNameChange={userNameChange} email={email} emailChange={emailChange} addToList={addToList}/>}
       />
 
+      <Route 
+      path='/updateRobo'
+      render={props => <UppdateRobot {...props} upName={upName} upNameChange={upNameChange} upUserName={upUserName} upUserNameChange={upUserNameChange} upEmail={upEmail} upEmailChange={upEmailChange} id={id} idChange={idChange} uppdate_robo={uppdate_robo}/>}
+      />
+
+      <Route 
+      path='/delRobo'
+      render={props => <DeleteRobot {...props} delid={delid} Changedelid={Changedelid} delRobo={delRobo}/>}
+      />
+
+       <Route 
+      path='/searchRobo'
+      render={props => <SearchBox {...props} search={search} onSearchChange={onSearchChange}/>}
+      />
       </Switch>  
         <Scroll>{
             <ErrorBoundry>
-              <CardList robots={robots}/>
+              <CardList filteredRobots={filteredRobots}/>
             </ErrorBoundry>
           }
         </Scroll>
@@ -65,6 +86,12 @@ const mapStateToProps = (state) =>{
     name: state.manage_data.name,
     username: state.manage_data.username,
     email: state.manage_data.email,
+    id: state.manage_data.id,
+    upName: state.manage_data.upName,
+    upUserName: state.manage_data.upUserName,
+    upEmail: state.manage_data.upEmail,
+    delid: state.manage_data.deid,
+    search: state.manage_data.searchField
   }
 }
 
@@ -73,7 +100,15 @@ const mapDispachToProps = (dispatch) =>{
     nameChange:(event) => dispatch(setName(event.target.value)),
     userNameChange: (event) => dispatch(setUserName(event.target.value)),
     emailChange: (event) => dispatch(setEmail(event.target.value)),
+    idChange: (event) => dispatch(setId(event.target.value)),
     addToList: () => dispatch(addRobot()),
+    upNameChange: (event) => dispatch(upName(event.target.value)),
+    upUserNameChange: (event) => dispatch(upUserName(event.target.value)),
+    upEmailChange: (event) => dispatch(upEmail(event.target.value)),
+    Changedelid: (event) => dispatch(delid(event.target.value)),
+    uppdate_robo: () => dispatch(updateRobot()),
+    delRobo: () => dispatch(deleteRobot()),
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value))
   }
 }
 
